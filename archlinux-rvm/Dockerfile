@@ -14,6 +14,7 @@ ENV APP_HOME /opt/rubie
 RUN mkdir -p $APP_HOME/.gem 
 RUN useradd --home-dir $APP_HOME --shell /bin/zsh --user-group --groups users,wheel rubie
 ADD .zshrc $APP_HOME/.zshrc
+ADD install_bootstrap_gems.sh $APP_HOME/install_bootstrap_gems.sh
 RUN chown -Rv rubie $APP_HOME
 
 # Set up  user + directory
@@ -26,6 +27,6 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys '409B6B1796C275462A17031138
 
 ENV PATH $PATH:$APP_HOME/.rvm/bin
 
-RUN zsh --login -c 'gem install bundler pry'
+RUN $APP_HOME/install_bootstrap_gems.sh
 
 CMD ["/bin/zsh"]
