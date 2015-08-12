@@ -1,0 +1,12 @@
+require 'byebug'
+
+IMAGE_TAG = 'aventinesolutions/archlinux-rvm'
+
+task default: :build
+
+desc 'build Aventine Ruby RVM (with yaourt) docker'
+task :build do
+  fail 'Docker build failed' unless system "docker build --tag #{IMAGE_TAG} ."
+end
+
+
