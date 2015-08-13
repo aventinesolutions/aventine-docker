@@ -6,7 +6,6 @@ RUN pacman --noconfirm -Suyy
 
 RUN pacman --noconfirm -S zsh
 RUN pacman --noconfirm -S ruby
-# RUN pacman --noconfirm -S emacs-nox
 
 ADD sudoers /etc/sudoers
 
@@ -28,5 +27,6 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys '409B6B1796C275462A17031138
 ENV PATH $PATH:$APP_HOME/.rvm/bin
 
 RUN $APP_HOME/install_bootstrap_gems.sh
+RUN sudo pacman --noconfirm -S emacs-nox
 
 CMD ["/bin/zsh"]
