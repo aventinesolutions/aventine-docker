@@ -2,15 +2,11 @@ FROM bmcustodio/archlinux-yaourt
 
 MAINTAINER Matthew Eichler <matthew.eichler@aventinesolutions.nl>
 
-RUN pacman --noconfirm -Suyy
-
-RUN pacman --noconfirm -S zsh
-RUN pacman --noconfirm -S ruby
+RUN pacman --noconfirm -Suyy && pacman --noconfirm -S zsh
 
 ADD sudoers /etc/sudoers
 
 ENV APP_HOME /opt/rubie
-RUN mkdir -p $APP_HOME/.gem 
 RUN useradd --home-dir $APP_HOME --shell /bin/zsh --user-group --groups users,wheel rubie
 ADD .zshrc $APP_HOME/.zshrc
 ADD install_bootstrap_gems.sh $APP_HOME/install_bootstrap_gems.sh
@@ -26,7 +22,6 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys '409B6B1796C275462A17031138
 
 ENV PATH $PATH:$APP_HOME/.rvm/bin
 
-RUN $APP_HOME/install_bootstrap_gems.sh
-RUN sudo pacman --noconfirm -S emacs-nox
+RUN $APP_HOME/install_bootstrap_gems.sh && sudo pacman --noconfirm -S emacs-nox
 
 CMD ["/bin/zsh"]
