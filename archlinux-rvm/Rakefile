@@ -1,5 +1,3 @@
-require 'byebug'
-
 IMAGE_TAG = 'aventinesolutions/archlinux-rvm'
 
 task default: :build

@@ -1,8 +1,8 @@
-FROM bmcustodio/archlinux-yaourt
+FROM l3iggs/archlinux
 
 MAINTAINER Matthew Eichler <matthew.eichler@aventinesolutions.nl>
 
-RUN pacman --noconfirm -Suyy && pacman --noconfirm -S zsh
+RUN pacman --noconfirm -Suyy && pacman --noconfirm -S zsh sudo
 
 ADD sudoers /etc/sudoers
 
