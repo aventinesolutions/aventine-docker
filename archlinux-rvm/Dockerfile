@@ -8,8 +8,8 @@ ADD sudoers /etc/sudoers
 
 ENV APP_HOME /opt/rubie
 RUN useradd --home-dir $APP_HOME --shell /bin/zsh --user-group --groups users,wheel rubie
-ADD .zshrc $APP_HOME/.zshrc
-ADD install_bootstrap_gems.sh $APP_HOME/install_bootstrap_gems.sh
+COPY locale.conf /etc/
+COPY .zshrc install_bootstrap_gems.sh $APP_HOME/
 RUN chown -Rv rubie $APP_HOME
 
 # Set up  user + directory
@@ -24,4 +24,4 @@ ENV PATH $PATH:$APP_HOME/.rvm/bin
 
 RUN $APP_HOME/install_bootstrap_gems.sh && sudo pacman --noconfirm -S emacs-nox
 
-CMD ["/bin/zsh"]
+ENTRYPOINT ["/bin/zsh"]
