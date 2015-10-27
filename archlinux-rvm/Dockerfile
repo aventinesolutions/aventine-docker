@@ -2,7 +2,7 @@ FROM l3iggs/archlinux
 
 MAINTAINER Matthew Eichler <matthew.eichler@aventinesolutions.nl>
 
-RUN pacman --noconfirm -Suyy && pacman --noconfirm -S zsh sudo
+RUN pacman --noconfirm -Suyy && pacman --noconfirm -S zsh sudo libyaml
 
 ADD sudoers /etc/sudoers
 
